@@ -55,6 +55,10 @@ export class User extends TimeStamps {
   @Field()
   lastName!: string;
 
+  @prop({ default: "" })
+  @Field({ nullable: true })
+  profileImage!: string;
+
   @prop()
   password?: string;
 
@@ -106,11 +110,11 @@ export class User extends TimeStamps {
   dealWith?: DealWith[];
 
   @prop()
-  @Field({nullable:true})
+  @Field({ nullable: true })
   jobSekeer!: JobSekeerInformation;
 
   @prop()
-  @Field({nullable:true})
+  @Field({ nullable: true })
   employer!: EmployerInformation;
 }
 

@@ -1,5 +1,6 @@
 import { IsEmail, Length, MaxLength, MinLength } from "class-validator";
-import { Field, InputType, Int, registerEnumType } from "type-graphql";
+import { FileUpload, GraphQLUpload } from "graphql-upload";
+import { Field, ID, InputType, Int, registerEnumType } from "type-graphql";
 import {
   UserType,
   EmployerType,
@@ -205,4 +206,16 @@ export class UsersFilter {
 
   @Field(() => String, { nullable: true })
   job?: string;
+}
+
+@InputType()
+export class createBlog {
+  @Field()
+  title!: string;
+
+  @Field()
+  body!: string;
+
+  @Field(() => GraphQLUpload)
+  Image!: FileUpload;
 }

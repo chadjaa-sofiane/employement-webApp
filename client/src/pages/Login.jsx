@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
@@ -13,17 +14,16 @@ const Title = withStyles(() => ({
   },
 }))(Typography);
 
-const useStyle = makeStyles(() => ({
+const useStyle = makeStyles((theme) => ({
   root: {
-    marginTop: "5rem",
-    padding: "1rem",
+    marginTop: "5em",
+    padding:"1em"
   },
   loginFiledsContainer: {
     display: "flex",
     justifyContent: "center",
     flexDirection: "column",
-    padding: "2rem",
-    margin: "auto",
+    margin: "1em auto",
   },
   textField: {
     width: "100%",
@@ -34,6 +34,10 @@ const useStyle = makeStyles(() => ({
   button: {
     float: "right",
   },
+  Link:{
+    color:theme.palette.primary.light,
+    fontWeight:"600"
+  }
 }));
 
 function Login() {
@@ -47,14 +51,14 @@ function Login() {
   const { submit, loading } = useLogAuth(LOG_IN, states, setErrors);
   return (
     <>
-      <Grid item xs={12} sm={8} style={{ margin: "auto" }}>
+      <Grid item xs={12} sm={6} style={{ margin: "auto" }}>
         <Paper square className={classes.root} variant="outlined" elevation={7}>
           <Title variant="h5" color="primary">
             Log In Page
           </Title>
           <form className={classes.loginFiledsContainer}>
             <label className={classes.textField}>
-              <Typography style={{ width: "10rem" }}>email :</Typography>
+              <Typography style={{ width: "7rem" }}>email :</Typography>
               <TextField
                 variant="outlined"
                 fullWidth
@@ -73,10 +77,11 @@ function Login() {
             </label>
             <br /> <br />
             <label className={classes.textField}>
-              <Typography style={{ width: "10rem" }}>password :</Typography>
+              <Typography style={{ width: "7rem" }}>password :</Typography>
               <TextField
                 variant="outlined"
                 fullWidth
+                type="password"
                 name="password"
                 value={states.password}
                 onChange={handlechange}
@@ -102,6 +107,10 @@ function Login() {
           </Button>
           <br />
           <br />
+          <br />
+          <Typography variant="h7" color="textPrimary">
+            if you don't have an account,<Link className={classes.Link} to="/regester"> sign up here!! </Link>
+          </Typography>
         </Paper>
       </Grid>
     </>

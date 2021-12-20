@@ -26,8 +26,8 @@ function PostDetailCard({ title, children, state, createdAt, jobsNeeded }) {
           <Typography color="primary" variant="h5">
             {jobsNeeded.lenght ? "JobsNEdeed" : ""}
           </Typography>
-          {jobsNeeded?.map((j) => (
-            <JobsNeededCard key={j.job} j={j} />
+          {jobsNeeded?.map((j, index) => (
+            <JobsNeededCard key={index} j={j} />
           ))}
         </Paper>
       </CardContent>

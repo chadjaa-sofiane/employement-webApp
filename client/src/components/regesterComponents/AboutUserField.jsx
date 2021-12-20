@@ -21,28 +21,33 @@ const useStyle = makeStyles(() => ({
 
 function AboutUserField({ children, handleBack, handleNext }) {
   const classes = useStyle();
-  //getAllJobsField
   return (
     <>
       <form className={classes.textFiledsContainer}>{children}</form>
-      <Button
-        onClick={handleBack}
-        disabled={false}
-        color="secondary"
-        variant="contained"
-      >
-        Back
-      </Button>
-      <Button
-        className={classes.button}
-        color="primary"
-        variant="contained"
-        onClick={() => {
-          handleNext();
-        }}
-      >
-        next
-      </Button>
+      <br/>
+      <br/>
+      <div style={{ padding: "0 1.5em" }}>
+        <Button
+          onClick={handleBack}
+          disabled={false}
+          color="secondary"
+          variant="contained"
+          size="large"
+        >
+          Back
+        </Button>
+        <Button
+          className={classes.button}
+          color="primary"
+          variant="contained"
+          onClick={() => {
+            handleNext();
+          }}
+          size="large"
+        >
+          next
+        </Button>
+      </div>
     </>
   );
 }

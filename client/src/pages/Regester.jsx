@@ -43,7 +43,7 @@ const ColorlibConnector = withStyles({
 
 const useStyle = makeStyles(() => ({
   root: {
-    marginTop: "5rem",
+    margin: "5rem 0",
     padding: "1rem",
   },
 }));

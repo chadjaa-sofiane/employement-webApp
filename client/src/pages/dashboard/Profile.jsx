@@ -57,9 +57,9 @@ function Profile() {
       firstName,
       lastName,
       state,
-      email,
       userType,
       jobSekeer,
+      profileImage,
       socialMedia,
     },
   } = data;
@@ -69,11 +69,14 @@ function Profile() {
       <>
         <Grid item xs={12} sm={6} md={3}>
           <Paper square className={classes.profileCard}>
-            <Avatar className={classes.avatar}></Avatar>
+            <Avatar
+              src={profileImage ? `/images/${profileImage}` : ""}
+              className={classes.avatar}
+            ></Avatar>
             <Typography color="primary" variant="h4">
               {` ${firstName} ${lastName}`}
             </Typography>
-            <br /> 
+            <br />
             <Typography
               className={classes.secondaryText}
               color="textSecondary"
@@ -132,9 +135,15 @@ function Profile() {
             </Paper>
             <br />
             <br />
-            {value === links.length - 4 && <Posts />}
-            {value === links.length - 3 && <Blogs />}
-            {value === links.length - 2 && <Comments />}
+            {value === links.length - 4 && (
+              <Posts _id={data.getUserByName._id} />
+            )}
+            {value === links.length - 3 && (
+              <Blogs _id={data.getUserByName._id} />
+            )}
+            {value === links.length - 2 && (
+              <Comments _id={data.getUserByName._id} />
+            )}
             {value === links.length - 1 && <About />}
           </Paper>
         </Grid>

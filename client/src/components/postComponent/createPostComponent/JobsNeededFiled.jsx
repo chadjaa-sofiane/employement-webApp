@@ -77,7 +77,7 @@ const JobsNeededFiled = ({
   jobStates = { ...initialState, job: jobs[0] || "" },
 }) => {
   const classes = useStyle({ isdisabled });
-  const oldState = useMemo(() => jobStates);
+  const oldState = useMemo(() => jobStates, [jobStates]);
   const [disabled, toggleDisabled] = useState(isdisabled);
   const [states, handleChange, setJobNeededState] = useForm(jobStates);
   function handleTime(e) {
@@ -139,8 +139,8 @@ const JobsNeededFiled = ({
           }
         >
           {jobs &&
-            jobs?.map((j) => (
-              <MenuItem key={j} value={j}>
+            jobs?.map((j, index) => (
+              <MenuItem key={index} value={j}>
                 {j}
               </MenuItem>
             ))}

@@ -32,7 +32,7 @@ export const getNewAccessToken = (refreshToken: string) => {
     delete res.iat;
     try {
       newAccessToken = sign(res, accessSecretToken);
-    } catch (e) {
+    } catch (e:any) {
       throw new Error(e.message);
     }
   });

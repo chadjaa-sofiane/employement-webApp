@@ -11,7 +11,7 @@ const useStyle = makeStyles(() => ({
     display: "flex",
     justifyContent: "center",
     flexDirection: "column",
-    padding: "2rem",
+    padding: "4rem",
   },
   textField: {
     width: "100%",
@@ -24,12 +24,7 @@ const useStyle = makeStyles(() => ({
   },
 }));
 
-function LocationField({
-  states,
-  handleChange,
-  handleBack,
-  handleNext,
-}) {
+function LocationField({ states, handleChange, handleBack, handleNext }) {
   const classes = useStyle();
   const { data, loading } = useQuery(
     gql`
@@ -72,23 +67,26 @@ function LocationField({
         </div>
         <br /> <br />
       </form>
-
-      <Button
-        onClick={handleBack}
-        disabled={true}
-        color="secondary"
-        variant="contained"
-      >
-        Back
-      </Button>
-      <Button
-        className={classes.button}
-        color="primary"
-        variant="contained"
-        onClick={handleNext}
-      >
-        next
-      </Button>
+      <div style={{ padding: "0 3em" }}>
+        <Button
+          onClick={handleBack}
+          disabled={true}
+          color="secondary"
+          variant="contained"
+          size="large"
+        >
+          Back
+        </Button>
+        <Button
+          className={classes.button}
+          color="primary"
+          variant="contained"
+          onClick={handleNext}
+          size="large"
+        >
+          next
+        </Button>
+      </div>
     </>
   );
 }

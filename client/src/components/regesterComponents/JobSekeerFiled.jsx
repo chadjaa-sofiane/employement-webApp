@@ -47,11 +47,13 @@ function JobSekeerFiled({ states, setState, handleChange }) {
         <>
           <div className={classes.textField}>
             <Typography variant="h6" color="textPrimary">
-              job filed :
+              job field :
             </Typography>
             <Select
               name="jobFiled"
-              onChange={handleChange}
+              onChange={(e) =>
+                setState((p) => ({ ...p, [e.target.name]: e.target.value }))
+              }
               value={states.jobFiled}
             >
               {data &&
@@ -73,7 +75,7 @@ function JobSekeerFiled({ states, setState, handleChange }) {
                   jobSekeer: { ...states["jobSekeer"], jobs: e.target.value },
                 }))
               }
-              value={states.jobSekeer.jobs}
+              value={states.jobSekeer.jobs || data.jobAccordingField[0]}
             >
               {data?.jobAccordingField?.map((field) => (
                 <MenuItem key={field} value={field}>

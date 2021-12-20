@@ -43,19 +43,21 @@ function UserTypeField({
   return (
     <>
       <Typography className={classes.title} variant="h4">
-        you will enter as
+        specific user type
       </Typography>
       <br />
       <br />
       <div className={classes.userTypeContainer}>
         <label className={classes.userTypeLAbel} htmlFor="employer">
-          <Typography
-            className={classes.title}
-            color={states.userType === "employer" ? "primary" : "textSecondary"}
-            variant="h6"
+          <Button
+            className={classes.btn}
+            component="span"
+            color="primary"
+            variant={states.userType === "employer" ? "contained" : "outlined"}
+            size="large"
           >
             Employer
-          </Typography>
+          </Button>
         </label>
         <input
           hidden
@@ -66,14 +68,15 @@ function UserTypeField({
           onChange={handleChange}
         />
         <label className={classes.userTypeLAbel} htmlFor="jobSekeer">
-          <Typography
-            color={
-              states.userType === "jobSekeer" ? "primary" : "textSecondary"
-            }
-            variant="h6"
+          <Button
+            className={classes.btn}
+            component="span"
+            color="primary"
+            variant={states.userType === "jobSekeer" ? "contained" : "outlined"}
+            size="large"
           >
             Job Sekeer
-          </Typography>
+          </Button>
         </label>
         <input
           hidden
@@ -86,22 +89,28 @@ function UserTypeField({
       </div>
       <br />
       <br />
-      <Button
-        onClick={handleBack}
-        disabled={false}
-        color="secondary"
-        variant="contained"
-      >
-        Back
-      </Button>
-      <Button
-        color="primary"
-        variant="contained"
-        style={{ float: "right" }}
-        onClick={getNext}
-      >
-        next
-      </Button>
+      <br />
+
+      <div style={{ padding: "0 3em" }}>
+        <Button
+          onClick={handleBack}
+          disabled={false}
+          color="secondary"
+          variant="contained"
+          size="large"
+        >
+          Back
+        </Button>
+        <Button
+          color="primary"
+          variant="contained"
+          style={{ float: "right" }}
+          onClick={getNext}
+          size="large"
+        >
+          next
+        </Button>
+      </div>
     </>
   );
 }

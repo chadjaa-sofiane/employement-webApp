@@ -28,8 +28,8 @@ function SearchBar() {
           aria-label="search bar"
         >
           <Tab label="posts" />
-          <Tab label="employers" disabled />
-          <Tab label="jobSekeers" disabled />
+          <Tab label="employers" />
+          <Tab label="jobSekeers" />
         </Tabs>
       </Paper>
     </Grid>

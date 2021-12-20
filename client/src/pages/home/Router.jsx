@@ -1,17 +1,29 @@
 import Grid from "@material-ui/core/Grid";
 import { Switch, Route } from "react-router-dom";
 import HomeHeader from "../../components/HomeHeader";
+import Intrpduction from "./Intrpduction";
+import { makeStyles } from "@material-ui/core";
+
+const useStyles = makeStyles({
+  root: {
+    width: "100%",
+    minHeight: "100vh",
+  },
+});
 
 function Router() {
+  const classes = useStyles();
   return (
-    <Switch>
+    <div className={classes.root}>
       <HomeHeader />
-      <Grid container>
-        <Route></Route>
-        <Route></Route>
-        <Route></Route>
-      </Grid>
-    </Switch>
+      <Switch>
+        <Grid container>
+          <Route path="/" exact>
+            <Intrpduction />
+          </Route>
+        </Grid>
+      </Switch>
+    </div>
   );
 }
 

@@ -65,7 +65,7 @@ function CreatePost() {
     state: "",
     jobSekeerType: "freelancer",
   });
-  const [createPost, { data, loading }] = useMutation(CREATE_POST, {
+  const [createPost] = useMutation(CREATE_POST, {
     update(_, { data: { createPost } }) {
       alert("create post successfuly");
       history.push("/dashboard/search");
@@ -98,8 +98,9 @@ function CreatePost() {
   }
   const DefaultStates = useCallback(() => {
     getJobs({ variables: { jobField: userInfo().jobFiled } });
-    setState({ ...states, state: userInfo().state });
-  }, [userInfo(), getJobs, setState]);
+    setState((prevStates) => ({ ...prevStates, state: userInfo().state }));
+  }, [
+    getJobs, setState]);
 
   useEffect(() => {
     DefaultStates();

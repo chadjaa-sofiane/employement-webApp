@@ -25,9 +25,6 @@ function EmployerFiled({ states, setState, handleChange }) {
   });
   return (
     <>
-      <Typography className={classes.textField} variant="h6" color="primary">
-        Employer field
-      </Typography>
       <div className={classes.textField}>
         <Typography variant="h6" color="textPrimary">
           Employer Type :
@@ -58,11 +55,13 @@ function EmployerFiled({ states, setState, handleChange }) {
             <>
               <div className={classes.textField}>
                 <Typography variant="h6" color="textPrimary">
-                  job filed :
+                  job field :
                 </Typography>
                 <Select
                   name="jobFiled"
-                  onChange={handleChange}
+                  onChange={(e) =>
+                    setState((p) => ({ ...p, [e.target.name]: e.target.value }))
+                  }
                   value={states.jobFiled}
                 >
                   {data &&
@@ -76,9 +75,13 @@ function EmployerFiled({ states, setState, handleChange }) {
               <br />
               <br />
               <div>
-                <Typography color="secondary">organization :</Typography>
+                <Typography color="secondary" variant="h5">
+                  organization :
+                </Typography>
+                <br />
+                <br />
                 <label className={classes.textField}>
-                  <Typography variant="h6" style={{ width: "10rem" }}>
+                  <Typography variant="h6" style={{ width: "15rem" }}>
                     name (*) :
                   </Typography>
                   <TextField
@@ -90,8 +93,9 @@ function EmployerFiled({ states, setState, handleChange }) {
                     value={states?.organization?.organizationName || ""}
                   />
                 </label>
+                <br />
                 <label className={classes.textField}>
-                  <Typography variant="h6" style={{ width: "10rem" }}>
+                  <Typography variant="h6" style={{ width: "15rem" }}>
                     description (*) :
                   </Typography>
                   <TextField

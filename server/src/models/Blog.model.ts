@@ -1,5 +1,6 @@
 import { getModelForClass, Prop, Ref } from "@typegoose/typegoose";
 import { ObjectType, Field, ID } from "type-graphql";
+import { TimeStamps } from "@typegoose/typegoose/lib/defaultClasses";
 import { User } from "./user.model";
 
 @ObjectType()
@@ -16,20 +17,34 @@ class Comments {
   likes!: number;
 }
 @ObjectType()
-export class Blogs {
+export class Blogs extends TimeStamps {
   @Field((type) => ID)
   _id!: string;
+
+  @Field()
+  createdAt!: Date;
+
+  @Field()
+  updatedAt!: Date;
+
+  @Prop({ required: true })
+  @Field()
+  title!: string;
 
   @Prop({ required: true })
   @Field()
   body!: string;
 
-  @Prop({ required: true })
+  @Prop({ require: false })
+  @Field()
+  imageUrl!: string;
+
+  @Prop({ required: false })
   @Field()
   likes!: number;
 
   @Prop({ required: true, ref: () => User, type: () => String })
-  @Field((type) => ID)
+  @Field((type) => User || ID)
   user!: Ref<User, string>;
 
   @Prop({ default: false })

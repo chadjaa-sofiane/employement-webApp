@@ -1,6 +1,11 @@
 import { useState, useEffect, useCallback } from "react";
 import { useHistory, useLocation } from "react-router";
-import { gql, useLazyQuery, useMutation } from "@apollo/client";
+import {
+  gql,
+  useApolloClient,
+  useLazyQuery,
+  useMutation,
+} from "@apollo/client";
 import { isLoggedIn, userInfo } from "../cache";
 import { GET_MY_INFO } from "../graphql/queries";
 
@@ -10,7 +15,6 @@ export const useForm = (initialState = {}) => {
     const { name, value, checked, type } = e.target;
     const input = type === "checkbox" ? checked : value;
     if (el) {
-      //state[id][name] = input;
       return setState({
         ...state,
         [el]: {
@@ -48,12 +52,12 @@ export const useToken = () => {
 };
 
 export const useGetMyInfo = () => {
-  const [getMyInfoQuery, { data, loading }] = useLazyQuery(GET_MY_INFO);
+  const [getMyInfoQuery, { data, loading, error }] = useLazyQuery(GET_MY_INFO);
   const getData = useCallback(() => {
     if (!isLoggedIn()) return;
     getMyInfoQuery();
-    if (data) userInfo(data.getMyInfo);
-  }, [data, getMyInfoQuery]);
+    if (data && !loading) userInfo(data.getMyInfo);
+  }, [data, getMyInfoQuery, loading]);
   useEffect(() => {
     getData();
   }, [getData]);
@@ -93,6 +97,10 @@ export const useLogAuth = (MUTATION, input, setErrors) => {
         Object.keys(exception.keyPattern).map((el) =>
           setErrors((p) => ({ ...p, [el]: 1 }))
         );
+      if (exception?.exception?.keyPattern)
+        Object.keys(exception.exception.keyPattern).map((el) =>
+          setErrors((p) => ({ ...p, [el]: 1 }))
+        );
     },
   });
   const submit = async (e) => {
@@ -129,4 +137,17 @@ export const useTabValue = (array, mainPath = "/") => {
     handleChange,
     value,
   };
+};
+
+export const useLogout = () => {
+  const client = useApolloClient();
+  const { push } = useHistory();
+  function logout() {
+    client.cache.evict({ fieldName: "me" });
+    client.cache.gc();
+    localStorage.clear();
+    isLoggedIn(false);
+    push("/");
+  }
+  return logout;
 };

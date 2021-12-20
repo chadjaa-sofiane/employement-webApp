@@ -1,4 +1,4 @@
-  import { Arg, Authorized, Ctx, ID, Mutation, Resolver } from "type-graphql";
+import { Arg, Authorized, Ctx, ID, Mutation, Resolver } from "type-graphql";
 import ContextType from "../../interfaces/ContextType";
 import { PostApplicationRequestInputs, UpdatePostInput } from "./inputs";
 import Post from "../../models/postAppReq.model";
@@ -19,7 +19,7 @@ class employerMutation {
       const newPost = new Post({ employer: Types.ObjectId(_id), ...Inputs });
       await newPost.save();
       return newPost;
-    } catch (e) {
+    } catch (e: any) {
       throw new Error(e.message);
     }
   }
@@ -43,7 +43,7 @@ class employerMutation {
         $set: Inputs as any,
       });
       return "update post successfuly";
-    } catch (e) {
+    } catch (e: any) {
       throw new Error(e.message);
     }
   }
@@ -65,7 +65,7 @@ class employerMutation {
         $set: { close: !result.close },
       });
       return `${result.close ? "close" : "open"} Post successfully !!!`;
-    } catch (e) {
+    } catch (e: any) {
       throw new Error(e.message);
     }
   }
@@ -85,7 +85,7 @@ class employerMutation {
     try {
       await Post.findByIdAndDelete(Types.ObjectId(postId));
       return "delete post successfully";
-    } catch (e) {
+    } catch (e: any) {
       throw new Error(e.message);
     }
   }

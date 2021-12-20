@@ -60,9 +60,7 @@ const UserForm = ({
         <br />
         <br />
         <label className={classes.textField}>
-          <Typography variant="h6" style={{ width: "10rem" }}>
-            last name :
-          </Typography>
+          <Typography style={{ width: "10rem" }}>last name :</Typography>
           <TextField
             variant="outlined"
             fullWidth
@@ -211,24 +209,32 @@ const UserForm = ({
             onChange={(e) => handleChange(e, "phone")}
           />
         </Typography>
+        {errors?.userName && (
+          <Typography variant="h6" color="secondary">
+            {errors.userName}
+          </Typography>
+        )}
       </form>
-
-      <Button
-        onClick={handleBack}
-        disabled={false}
-        color="secondary"
-        variant="contained"
-      >
-        Back
-      </Button>
-      <Button
-        className={classes.button}
-        color="primary"
-        variant="contained"
-        onClick={submit}
-      >
-        finish
-      </Button>
+      <div style={{ padding: "0 1.5em" }}>
+        <Button
+          onClick={handleBack}
+          disabled={false}
+          color="secondary"
+          variant="contained"
+          size="large"
+        >
+          Back
+        </Button>
+        <Button
+          className={classes.button}
+          color="primary"
+          variant="contained"
+          onClick={submit}
+          size="large"
+        >
+          finish
+        </Button>
+      </div>
     </>
   );
 };

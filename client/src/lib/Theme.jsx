@@ -1,7 +1,7 @@
-import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
+import { createTheme, ThemeProvider } from "@material-ui/core/styles";
 import deepOrange from "@material-ui/core/colors/deepOrange";
 
-const theme = createMuiTheme({
+const theme = createTheme({
   palette: {
     background: {
       paper: " rgba(240, 240, 240, 1)",

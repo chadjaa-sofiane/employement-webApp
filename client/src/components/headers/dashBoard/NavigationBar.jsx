@@ -1,7 +1,7 @@
 import { useMemo } from "react";
-import ExploreIcon from "@material-ui/icons/Explore";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
+import ExploreIcon from "@material-ui/icons/Explore";
 import HomeIcon from "@material-ui/icons/Home";
 import { useTabValue } from "../../../lib/hooks";
 import { makeStyles } from "@material-ui/core/styles";
@@ -10,6 +10,9 @@ const useStyles = makeStyles((theme) => ({
   navBarContainer: {
     width: "20rem",
     margin: "auto",
+    [theme.breakpoints.down("sm")]: {
+      display: "none",
+    },
   },
   navBar: {
     width: "100%",

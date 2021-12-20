@@ -9,6 +9,7 @@ import { ApolloServer } from "apollo-server-express";
 import expressApp from "./expressApp";
 import connectionString from "./configs/db";
 import { customAuthChecker } from "./lib/customAuthChecker";
+import { graphqlUploadExpress } from "graphql-upload";
 
 (async () => {
   const { port, env } = config;
@@ -17,12 +18,11 @@ import { customAuthChecker } from "./lib/customAuthChecker";
       useNewUrlParser: true,
       useUnifiedTopology: true,
       useCreateIndex: true,
-      useFindAndModify:false
+      useFindAndModify: false,
     })
     .then(() => console.log("connection with database successfuly "))
     .catch(() => console.log("connection with database failed !!"));
 
-    
   const schemaOption: BuildSchemaOptions = {
     resolvers,
     authChecker: customAuthChecker,
@@ -30,9 +30,15 @@ import { customAuthChecker } from "./lib/customAuthChecker";
 
   const App: any = new expressApp({
     port: port,
-    middleWares: [json(), urlencoded({ extended: true }), cors()],
+    middleWares: [
+      json(),
+      urlencoded({ extended: true }),
+      cors(),
+      graphqlUploadExpress({ maxFileSize: 10000000, maxFiles: 10 }),
+    ],
   });
   const apolloServer = new ApolloServer({
+    uploads: false,
     schema: await buildSchema(schemaOption),
     context: ({ req, res }) => ({
       req,
